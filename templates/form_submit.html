@@ -1,0 +1,76 @@
+<html>
+<head>
+    <title>Handle POST requests with Flask</title>
+    <!--<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">-->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</head>
+<body>
+<div id="container">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h1>Add a new emotionally charged word</h1></div>
+
+        <div class="panel-body">
+            <form method="post" action="{{ url_for('words') }}">
+                <div class="input-group input-group-lg">
+                    <label for="word">Type a word: </label>
+                    <input type="text" name="word"/>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Emotions</div>
+                    <div class="panel-body">
+
+                        <table class="table">
+                            <tbody>
+                            {% for emotion in emotions %}
+                            <tr>
+                                <td class="col-md-1">{{ emotion.description }}</td>
+                                <td>
+                                    <input type=range min=0 max=100 value=0 id=emotion-{{ emotion.id }} name='emotion-{{ emotion.id }}' step=1 oninput="outputUpdate(value, '{{ emotion.id }}' )">
+                                    <output for=emotion-{{ emotion.id }} id=volume-{{ emotion.id }}>0</output>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <input type="submit" />
+
+                <script>
+                    function outputUpdate(vol, emo) { document.querySelector('#volume-' + emo).value = vol; }
+                </script>
+            </form>
+        </div> <!-- Pannel body -->
+    </div> <!-- panel -->
+</div> <!-- Container -->
+
+</body>
+</html>
+
+<!--<thead>-->
+<!--<tr>-->
+<!--<td>Emotion</td>-->
+<!--<td>Power</td>-->
+<!--</tr>-->
+<!--</thead>-->
+
+<!--<div class="row">-->
+<!--<div class="col-md-1">{{ emotion }}</div>-->
+<!--<div class="col-md-8">-->
+<!--<input type=range min=0 max=100 value=0 id=fader-{{ emotion }} step=1 oninput="outputUpdate(value, '{{ emotion }}' )">-->
+<!--</div>-->
+<!--<div class="col-md-1">-->
+<!--<output for=fader-{{ emotion }} id=volume-{{ emotion }}>0</output>-->
+<!--</div>-->
+<!--</div>-->
