@@ -1,0 +1,37 @@
+# Maintainer: 
+# This is for educaion purpose only 
+
+pkgname=project-name-git
+pkgver=0.0.0
+pkgrel=1
+pkdesc="Awesome and obviously usefull package"
+arch=('i686' 'x86_64')
+url="https://stash.atlassian.com/projects/cool-client/browse"
+license=('proprietary')
+depends=('qt5-base' 'libltdl' 'mesa' 'libxslt' 'hicolor-icon-theme'
+         'libxcomposite' 'libpulse' 'gstreamer0.10' 'gstreamer0.10-base')
+makedepends=('git' 'cmake' 'make')
+conflicts=('project-name')
+provides=('project-name')
+INTEGRITY_CHECK=('sha256')
+sha256sums=('SKIP')
+source=(
+	"git+ssh://git@stash.atlassian.com:1797/proj/some-client.git"
+)
+
+pkgver(){
+	cd "${srcdir}/qt-client"
+	git describe --tags --dirty 2>/dev/null || git rev-parse --short HEAD
+}
+
+build(){
+	cd "${srcdir}/some-client"
+	git submodule init
+	git submodule update --recursive
+	cmake .
+	make
+}
+
+package(){
+	cp -r "${srcdir}/qt-client/installroot/opt" "${pkgdir}"
+}

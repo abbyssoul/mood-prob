@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # import fileinput
 import sys
 import argparse
@@ -12,6 +14,10 @@ def print_stats(emotional_entity):
         sys.stdout.flush()
 
 def main():
+    """
+    Command line control script
+    :return:
+    """
     arg_parser = argparse.ArgumentParser(description='Batch create HC randomly named rooms')
     arg_parser.add_argument("-v", "--verbose", help="increase output verbosity",
                         action="store_true")

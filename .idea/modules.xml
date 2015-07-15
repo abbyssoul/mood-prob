@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/emotions/emotions.iml" filepath="$PROJECT_DIR$/emotions/emotions.iml" />
       <module fileurl="file://$PROJECT_DIR$/moody-bot.iml" filepath="$PROJECT_DIR$/moody-bot.iml" />
     </modules>
   </component>
